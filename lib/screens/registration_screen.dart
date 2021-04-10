@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flash_chat/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flash_chat/components/rounded_button.dart';
@@ -10,6 +11,7 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
+  String userName;
   String email;
   String password;
   bool showSpinner = false;
@@ -38,6 +40,17 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               ),
               SizedBox(
                 height: 48.0,
+              ),
+              TextField(
+                  keyboardType: TextInputType.text,
+                  textAlign: TextAlign.center,
+                  onChanged: (value) {
+                    userName = value;
+                  },
+                  decoration: kTextFieldDecoration.copyWith(
+                      hintText: 'Enter Your Name')),
+              SizedBox(
+                height: 8.0,
               ),
               TextField(
                   keyboardType: TextInputType.emailAddress,
@@ -72,13 +85,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   });
                   try {
                     final newUser = await _auth.createUserWithEmailAndPassword(
-                        email: email, password: password);
-                    if (newUser != null) {
+                        email: email, password: password)
+                        .then((currentUser) => Firestore.instance
+                        .collection("users")
+                        .document()
+                        .setData({
+                      "fname": userName,
+                      "email": email,
+                    }).then((value) {
                       Navigator.pushNamed(context, '/chat');
-                    }
-                    setState(() {
-                      showSpinner = false;
-                    });
+                      setState(() {
+                        showSpinner = false;
+                      });
+                    }));
                   } catch (e) {
                     print(e);
                   }
