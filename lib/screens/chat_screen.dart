@@ -1,3 +1,4 @@
+import 'package:flash_chat/components/bottomAppBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flash_chat/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -100,6 +101,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 ],
               ),
             ),
+            MyBottomAppBar(),
           ],
         ),
       ),
