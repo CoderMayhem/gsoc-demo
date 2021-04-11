@@ -130,10 +130,10 @@ class _ChatScreenState extends State<ChatScreen> {
                 ),
               ),
             ),
-            MyBottomAppBar(),
           ],
         ),
       ),
+      bottomNavigationBar: MyBottomAppBar(),
     );
   }
 }
