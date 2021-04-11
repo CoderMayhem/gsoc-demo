@@ -51,7 +51,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: null,
+        automaticallyImplyLeading: false,
         actions: <Widget>[
           IconButton(
               icon: Icon(Icons.close),
@@ -60,7 +60,13 @@ class _ChatScreenState extends State<ChatScreen> {
                 Navigator.pop(context);
               }),
         ],
-        title: Text('⚡️Chat'),
+        title: Row(
+          children: [
+            CircleAvatar(backgroundImage: AssetImage('images/img.jpg'),  radius: 20.0,),
+            SizedBox(width: 8),
+            Text('Group Chat'),
+          ],
+        ),
         backgroundColor: Color(0xff29406B),
       ),
       body: SafeArea(
@@ -117,9 +123,9 @@ class _ChatScreenState extends State<ChatScreen> {
                     SizedBox(
                       width: 5,
                     ),
-                    Icon(Icons.camera_alt_outlined),
-                    Icon(Icons.attach_file_outlined),
-                    Icon(Icons.more_vert_outlined),
+                    Icon(Icons.camera_alt_outlined, size: 30, color: Color(0xff29406B)),
+                    Icon(Icons.attach_file_outlined, size: 30, color: Color(0xff29406B)),
+                    Icon(Icons.more_vert_outlined, size: 30, color: Color(0xff29406B)),
                   ],
                 ),
               ),
@@ -196,7 +202,7 @@ class MessageBubble extends StatelessWidget {
           ),
           SizedBox(height: 2),
           Material(
-            color: isMe ? Color(0xff29406B) : Colors.white,
+            color: isMe ? Color(0xff29406B) : Color(0xffF5F6FA),
             elevation: 5.0,
             borderRadius: isMe
                 ? BorderRadius.only(
@@ -212,7 +218,7 @@ class MessageBubble extends StatelessWidget {
               child: Text(
                 '$text',
                 style: TextStyle(
-                  color: isMe ? Colors.white : Colors.black54,
+                  color: isMe ? Colors.white : Color(0xff1C2650),
                   fontSize: 15.0,
                 ),
               ),
